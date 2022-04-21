@@ -19,7 +19,10 @@ public class NoSpaceInName extends PluginBase implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void DataPacketReceiveEvent(DataPacketReceiveEvent e) {
         if (e.getPacket() instanceof LoginPacket) {
-            ((LoginPacket) e.getPacket()).username = ((LoginPacket) e.getPacket()).username.replace(" ", replaceWith);
+            LoginPacket packet = (LoginPacket) e.getPacket();
+            if (packet.username != null) {
+                packet.username = packet.username.replace(" ", replaceWith);
+            }
         }
     }
 }
